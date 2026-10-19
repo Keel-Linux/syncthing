@@ -1,0 +1,44 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/pkg-info.mk
+
+# Go 1.26.2 is a pinned build tool on the build host at
+# /usr/local/go1.26 (docs/build.md): trixie's golang is 1.24 and
+# go.mod needs go 1.26.2. The build is offline, from vendor/ only.
+export PATH := /usr/local/go1.26/bin:$(PATH)
+
+export GOTOOLCHAIN := local
+export GOPROXY := off
+export GOFLAGS := -mod=vendor
+export GOCACHE := $(CURDIR)/debian/.gocache
+export GOPATH := $(CURDIR)/debian/.gopath
+export CGO_ENABLED := 0
+
+# The release stamp is the published time of upstream v2.1.6,
+# 2026-10-06T06:08:27Z.
+GO_LDFLAGS := -X github.com/syncthing/syncthing/lib/build.Version=v2.1.6 \
+	-X github.com/syncthing/syncthing/lib/build.Stamp=1791266907
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	go build -mod=vendor -trimpath -ldflags "$(GO_LDFLAGS)" \
+		-o syncthing ./cmd/syncthing
+
+# The upstream test suite is long and parts of it need the network or a
+# browser; tests/run.sh of this repository checks the built binary
+# instead (debian/README.source).
+override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	go vet ./cmd/syncthing ./lib/build
+endif
+
+override_dh_auto_install:
+	install -D -m 0755 syncthing debian/syncthing/usr/bin/syncthing
+
+# dwz does not understand Go's DWARF.
+override_dh_dwz:
+
+override_dh_auto_clean:
+	rm -rf debian/.gopath debian/.gocache syncthing

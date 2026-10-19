@@ -1,0 +1,11 @@
+syncthing (2.1.6+keel1) trixie; urgency=medium
+
+  * First Keel package (handbook decision 0050): the syncthing binary,
+    built offline from the upstream release source with its vendor/
+    tree, with the pinned Go 1.26.2 of the build host (docs/build.md).
+    trixie's golang is 1.24 and go.mod needs go 1.26.2.
+  * The package ships only /usr/bin/syncthing and the documentation:
+    the systemd service, the system user and the configuration come
+    from the keel-overlay-syncthing overlay.
+
+ -- Marcos Méndez <marcos.mendez@pop.coop>  Sun, 19 Oct 2026 12:00:00 +0000

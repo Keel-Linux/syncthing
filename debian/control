@@ -1,0 +1,25 @@
+Source: syncthing
+Section: net
+Priority: optional
+Maintainer: KeelLinux maintainers <admin@keellinux.org>
+Uploaders: Marcos Méndez <marcos.mendez@pop.coop>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.2
+Homepage: https://syncthing.net
+Rules-Requires-Root: no
+Vcs-Git: https://git.pop.coop/Keel-Linux/syncthing.git
+Vcs-Browser: https://git.pop.coop/Keel-Linux/syncthing
+
+Package: syncthing
+Architecture: any
+Depends:
+ ${misc:Depends},
+Description: continuous file synchronization program
+ Syncthing synchronizes files between two or more computers in real
+ time, safely protected from prying eyes. It works over any network,
+ is easy to set up and runs on Linux, Windows and macOS.
+ .
+ This package ships only the syncthing binary and its documentation.
+ The systemd service, the system user and the configuration ship in
+ the keel-overlay-syncthing overlay, not in this package (handbook
+ decision 0050).

@@ -1,0 +1,5 @@
+This package ships only the syncthing binary and its documentation.
+
+The systemd service, the system user and the configuration are shipped
+by the keel-overlay-syncthing overlay, not by this package (handbook
+decision 0050).
