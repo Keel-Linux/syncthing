@@ -1,0 +1,13 @@
+# Test fixtures of upstream Syncthing, extended from the default rules
+# (keel-linux/.github security-scan.yml: a fixture goes in this file, a
+# false positive in .github/.gitleaksignore). The keys below exist only to
+# be read by the upstream test suite; no service uses them.
+[extend]
+useDefault = true
+
+[allowlist]
+paths = [
+  '''^lib/api/testdata/config/(https-)?key\.pem$''',
+  '''^test/h[1-4]/(https-)?key\.pem$''',
+  '''^lib/signature/signature_test\.go$''',
+]

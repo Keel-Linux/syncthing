@@ -1,0 +1,62 @@
+# Security scan baseline (keel-linux/.github, security-scan.yml): findings
+# that were read and are not a risk, one per line, the fingerprint and why.
+# All findings below are in the upstream Syncthing source of this
+# repository; the Keel packaging (debian/, tests/) has none. Upstream
+# code is kept as released; issues that are real are upstream's to fix.
+
+shellcheck:SC2148:vendor/modernc.org/sqlite/unconvert.sh:65e9eda1202e vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2148:vendor/modernc.org/sqlite/tpch.sh:8e63973d9139 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2148:vendor/modernc.org/libc/build_all_targets.sh:8e63973d9139 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:5eebe606c96d vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:f07149a786c3 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:5c14e1064006 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:a47b15e438dc vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:4f366bbcd601 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:863ec1500478 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:821650bd33e8 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:5387c764097c vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2034:vendor/golang.org/x/sys/unix/mkerrors.sh:5e46f16f3202 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2124:vendor/golang.org/x/sys/unix/mkerrors.sh:4108235065a9 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2046:vendor/golang.org/x/sys/unix/mkall.sh:f6b69a40906e vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2221:vendor/golang.org/x/sys/unix/mkall.sh:92c0be71a608 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2222:vendor/golang.org/x/sys/unix/mkall.sh:92c0be71a608 vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2027:vendor/golang.org/x/sys/unix/mkall.sh:903958b3ffea vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2164:vendor/github.com/rabbitmq/amqp091-go/certs.sh:b765b9e6a2aa vendored module script, upstream code, not run by the build or the package
+shellcheck:SC2046:vendor/github.com/calmh/incontainer/docker-test.sh:87f6fa3693ef vendored module script, upstream code, not run by the build or the package
+shellcheck:SC1083:script/deb-post-inst.template:47fbe09598b5 upstream packaging template with {placeholders}, not installed by this package
+shellcheck:SC1083:script/deb-post-inst.template:b13069828d31 upstream packaging template with {placeholders}, not installed by this package
+shellcheck:SC1128:lib/build/runtimeos.sh:3af71adb278a upstream dev script that generates runtimeos.gen.go at upstream build time; not run by debian/rules
+shellcheck:SC2034:etc/freebsd-rc/syncthing:2d6e40339a10 upstream FreeBSD rc script, not used on Debian
+shellcheck:SC2034:etc/freebsd-rc/syncthing:6588f6d2c9cd upstream FreeBSD rc script, not used on Debian
+semgrep:bash.lang.security.ifs-tampering.ifs-tampering:build.sh:fdbe2dc66bc3 upstream dev build script, not run by the package build (debian/rules calls go build directly)
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:cmd/dev/stgenfiles/main.go:6015cc9b848e upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:cmd/dev/stvanity/main.go:68bc670f1bf0 upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.net.use-tls.use-tls:cmd/infra/stcrashreceiver/main.go:b590cac90321 upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.net.use-tls.use-tls:cmd/infra/stcrashreceiver/main.go:cb7e328963dd upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.tls.tls-with-insecure-cipher:cmd/infra/strelaypoolsrv/main.go:82e028e44193 upstream relay cipher list for compatibility, negotiated per connection; not changed in the Keel packaging
+semgrep:go.lang.security.audit.net.use-tls.use-tls:cmd/infra/strelaypoolsrv/main.go:691ba87f0df2 upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:cmd/stdiscosrv/apisrv.go:6015cc9b848e upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.net.use-tls.use-tls:cmd/stdiscosrv/main.go:80c2a0728dd6 upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.missing-ssl-minversion.missing-ssl-minversion:cmd/strelaysrv/main.go:81bb71c4f957 upstream sets TLS parameters at runtime from its configuration; the Keel packaging does not change upstream TLS code
+semgrep:go.lang.security.audit.crypto.missing-ssl-minversion.missing-ssl-minversion:cmd/syncthing/cli/client.go:1b23c7f2970d upstream sets TLS parameters at runtime from its configuration; the Keel packaging does not change upstream TLS code
+semgrep:go.lang.security.audit.crypto.missing-ssl-minversion.missing-ssl-minversion:cmd/syncthing/main.go:5be6e65b9e94 upstream sets TLS parameters at runtime from its configuration; the Keel packaging does not change upstream TLS code
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:internal/db/sqlite/db_service.go:6015cc9b848e upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.injection.open-redirect.open-redirect:lib/api/api.go:893964170943 upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.missing-ssl-minversion.missing-ssl-minversion:lib/api/api_auth.go:2fce42e67bb6 upstream sets TLS parameters at runtime from its configuration; the Keel packaging does not change upstream TLS code
+semgrep:go.lang.security.audit.crypto.missing-ssl-minversion.missing-ssl-minversion:lib/api/api_auth.go:8e8d22b0de19 upstream sets TLS parameters at runtime from its configuration; the Keel packaging does not change upstream TLS code
+semgrep:go.lang.security.audit.net.cookie-missing-httponly.cookie-missing-httponly:lib/api/api_csrf.go:358c0987546a upstream GUI session cookie, set by the local GUI; not changed in the Keel packaging
+semgrep:go.lang.security.audit.net.cookie-missing-secure.cookie-missing-secure:lib/api/api_csrf.go:358c0987546a upstream GUI session cookie, set by the local GUI; not changed in the Keel packaging
+semgrep:generic.secrets.security.detected-bcrypt-hash.detected-bcrypt-hash:lib/api/testdata/config/config.xml:7a6dda6e47b6 upstream test fixture, read by the test suite only, not a real secret
+semgrep:generic.secrets.security.detected-private-key.detected-private-key:lib/api/testdata/config/https-key.pem:10f883f2bce3 upstream test fixture, read by the test suite only, not a real secret
+semgrep:generic.secrets.security.detected-private-key.detected-private-key:lib/api/testdata/config/key.pem:10f883f2bce3 upstream test fixture, read by the test suite only, not a real secret
+semgrep:go.lang.security.audit.net.cookie-missing-httponly.cookie-missing-httponly:lib/api/tokenmanager.go:27fc162499bb upstream GUI session cookie, set by the local GUI; not changed in the Keel packaging
+semgrep:go.lang.security.audit.net.cookie-missing-secure.cookie-missing-secure:lib/api/tokenmanager.go:27fc162499bb upstream GUI session cookie, set by the local GUI; not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.missing-ssl-minversion.missing-ssl-minversion:lib/dialer/internal.go:77a03b661df6 upstream sets TLS parameters at runtime from its configuration; the Keel packaging does not change upstream TLS code
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:lib/fs/fakefs.go:6015cc9b848e upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:lib/model/folder.go:6015cc9b848e upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:lib/nat/service.go:6015cc9b848e upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:lib/rand/random.go:1dd888703485 upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.net.use-tls.use-tls:lib/syncthing/syncthing.go:8d64ee04fecd upstream code, not changed in the Keel packaging
+semgrep:go.lang.security.audit.crypto.math_random.math-random-used:lib/ur/usage_report.go:6015cc9b848e upstream code, not changed in the Keel packaging
+semgrep:generic.secrets.security.detected-bcrypt-hash.detected-bcrypt-hash:man/syncthing-rest-api.7:66d017fb2bb3 documentation example hash, not a credential
+semgrep:bash.lang.security.ifs-tampering.ifs-tampering:script/codecov-upload.sh:e42e4133f052 upstream CI upload script, not run by the build or the package

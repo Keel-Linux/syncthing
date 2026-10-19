@@ -1,0 +1,20 @@
+# Light CI on GitHub-hosted runners, for pull requests on the GitHub mirror
+# (decision 0056). The full CI is .forgejo/workflows on git.pop.coop. The
+# full build runs on the Keel build host with its pinned Go 1.26.2
+# (docs/build.md); the GitHub runner has no Go, so this job runs the fast
+# static packaging checks only (tests/run.sh --static).
+name: package
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Static packaging checks
+        run: tests/run.sh --static

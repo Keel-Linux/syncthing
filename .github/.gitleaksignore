@@ -1,0 +1,17 @@
+# False positives of gitleaks (keel-linux/.github security-scan.yml), each
+# with the reason it is not a secret:
+#
+# The first line is a fixed upstream constant of Syncthing, overridden at
+# launch through the STGUIAPIKEY variable; it is source, not a secret.
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:lib/rc/rc.go:generic-api-key:37
+# The lines below are generated SQLite bytecode of the vendored
+# modernc.org/sqlite, not secrets.
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:1203
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:1285
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:8387
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:29283
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:31257
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:74005
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:75630
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:83686
+7706edc54581dee33aaad8c0689d2a9da58e4e5f:vendor/modernc.org/sqlite/lib/sqlite_g_0000000000060000.go:generic-api-key:116326
