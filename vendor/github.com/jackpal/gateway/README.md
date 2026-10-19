@@ -1,0 +1,141 @@
+# gateway
+
+A simple library for discovering the IP address of the default gateway.
+
+Supports both IPv4 and IPv6.
+
+### IPv4 Example
+
+```go
+package main
+
+import (
+    "fmt"
+
+    "github.com/jackpal/gateway"
+)
+
+func main() {
+    gw, err := gateway.DiscoverGateway()
+    if err != nil {
+        fmt.Println(err)
+    } else {
+        fmt.Println("IPv4 Gateway:", gw.String())
+   }
+}
+```
+
+### IPv6 Example
+
+```go
+package main
+
+import (
+    "fmt"
+
+    "github.com/jackpal/gateway"
+)
+
+func main() {
+    gw, err := gateway.DiscoverGatewayIPv6()
+    if err != nil {
+        fmt.Println(err)
+    } else {
+        fmt.Println("IPv6 Gateway:", gw.String())
+   }
+}
+```
+
+### IPv4 and IPv6 Platform Support
+
+| Platform         | IPv4 | IPv6 |
+|------------------|------|------|
+| Darwin (macOS)   | ✅   | ✅   |
+| Dragonfly        | ✅   | ✅   |
+| FreeBSD          | ✅   | ✅   |
+| Linux            | ✅   | ✅   |
+| NetBSD           | ✅   | ✅   |
+| OpenBSD          | ✅   | ✅   |
+| Solaris / illumos| ✅   | ✅   |
+| Windows          | ✅   | ✅   |
+
+Other platforms return an error.
+
+Pull requests for other OSs happily considered!
+
+## Versions
+
+### v1.2.0
+
++ Add IPv6 gateway discovery: `DiscoverGatewayIPv6()`, `DiscoverGatewaysIPv6()`, `DiscoverInterfaceIPv6()`.
+  + Supported on Darwin, BSD variants, Linux, Windows, and Solaris/illumos.
+  + **Note**: IPv6 support has been verified on real devices for Linux and Darwin. Other platforms are implemented based on unit tests with synthetic route table data and are considered "best-effort".
++ Deduplicate results from `DiscoverGateways()` and `DiscoverGatewaysIPv6()`.
+
+### v1.1.2
+
++ Fix metric parsing in localized Windows versions (e.g., Spanish).
++ Standardize test file naming (use `_test.go` suffix).
++ Update dependencies and Go version to 1.26.2.
+
+### v1.1.1
+
++ Filter out On-link gateways. This is a Windows-specific feature. On-link gateways aren't currently connected to the Internet.
+
+### v1.1.0
+
++ Add `func DiscoverGateways() ([]net.IP, error)`. This func returns an array of gateways that contains at least one gateway. Otherwise returns an error.
++ Update to go version 1.24.2
++ Update dependencies to latest versions. (There was an x/net security warning.)
+
+### v1.0.16
+
+Update x/net dependency. This was done to squelch a github security
+alert caused by depending upon an old version of x/net.
+
+### v1.0.15
+
+Update dependencies to latest versions. This was done to squelch a github security
+alert caused by depending upon an old version of x/net. This is the first time I've
+updated module versions, the tests pass, so hopefully everything's good.
+
+### v1.0.14
+
++ [Fix panic when interface not set in Solaris `netstat -rn` output.](https://github.com/jackpal/gateway/pull/42)
+
+### v1.0.13
+
++ Add tools/check-cross-compile.sh to check that the code compiles for various OSs.
++ Fix compilation errors exposed by tools/check-cross-compile.sh.
+
+### v1.0.12
+
++ If there are multiple default gateways, Windows now returns the gateway with the lowest metric.
++ Fix solaris build break. (In theory, IDK how to test this easily.)
++ Upgrade to golang 1.21
++ Upgrade golang.org/x/net version, makes dependabot happy. Probably was not any actual security
+  issue because gateway doesn't use any of the APIs of golang.org/x/net that had security issues.
+
+### v1.0.11
+
++ Implement DiscoverInterface for BSD-like OSes.
+
+### v1.0.10
+
++ Fix non-BSD-based builds.
+  
+
+### v1.0.9
+
++ Add go.mod and go.sum files.
++ Use "golang.org/x/net/route" to implement all BSD variants.
+  + As a side effect this adds support for Dragonfly and NetBSD. 
++ Add example to README.
++ Remove broken continuous integration.
+
+### v1.0.8
+
++ Add support for OpenBSD
++ Linux parser now supports gateways with an IP address of 0.0.0.0
++ Fall back to `netstat` on darwin systems if `route` fails.
++ Simplify Linux /proc/net/route parsers.
