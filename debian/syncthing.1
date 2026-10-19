@@ -1,0 +1,45 @@
+.TH SYNCTHING 1 "October 2026" "syncthing 2.1.6" "User Commands"
+.SH NAME
+syncthing \- continuous file synchronization program
+.SH SYNOPSIS
+.B syncthing
+.RI [ command ]
+.RI [ flags ]
+.SH DESCRIPTION
+Syncthing synchronizes files between two or more computers in real
+time, safely protected from prying eyes. It works over any network.
+.SS Commands
+.TP
+.B serve
+Run Syncthing (the default).
+.TP
+.B generate
+Generate key and config, then exit.
+.TP
+.B cli
+Command line interface for a running Syncthing.
+.TP
+.B device\-id
+Show device ID, then exit.
+.TP
+.B version
+Show version, then exit.
+.SS Flags
+.TP
+.BI \-H " PATH" "\fR,\fP " \-\-home= PATH
+Set the configuration and data directory.
+.TP
+.B \-\-no\-browser
+Do not start the browser.
+.TP
+.BI \-\-gui\-address= URL
+Override the GUI listen address.
+.SH FILES
+.TP
+.I ~/.local/state/syncthing/config.xml
+The Syncthing configuration.
+.SH "SEE ALSO"
+The full documentation at https://docs.syncthing.net.
+.SH AUTHORS
+The Syncthing authors. This man page is part of the Keel Linux
+packaging of Syncthing.

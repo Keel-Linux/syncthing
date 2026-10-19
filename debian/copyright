@@ -1,0 +1,31 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Syncthing
+Upstream-Contact: https://github.com/syncthing/syncthing/issues
+Source: https://github.com/syncthing/syncthing
+Comment: The Go modules under vendor/ come from the upstream release
+ source tarball, which carries them.
+
+Files: *
+Copyright: 2014-2026 the Syncthing authors
+License: MPL-2.0
+
+Files: debian/*
+Copyright: 2026 Keel Linux maintainers <admin@keellinux.org>
+License: MPL-2.0
+
+Files: vendor/*
+Copyright: the authors of each module
+License: various
+Comment: Each vendored module keeps its own license notices in its
+ directory; the summary of debian/copyright of the Debian package
+ syncthing (1.2.12+dfsg1-2) in Debian lists them and applies here too.
+
+License: MPL-2.0
+ MPL-2.0: Mozilla Public License Version 2.0.
+ .
+ On Debian systems the full text of the Mozilla Public License Version
+ 2.0 is in /usr/share/common-licenses/MPL-2.0.
+
+License: various
+ Each vendored module keeps its own license text in its directory
+ under vendor/.

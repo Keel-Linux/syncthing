@@ -1,0 +1,52 @@
+syncthing source for Keel Linux
+================================
+
+Layout
+------
+
+This repository carries the full upstream source of Syncthing, the
+continuous file synchronization program, with the debian/ packaging of
+Keel Linux on top. The master branch holds both, as two commits per
+release: the import of the upstream release source and the packaging.
+
+Upstream source
+---------------
+
+The upstream source is the release tarball
+syncthing-source-<version>.tar.gz of
+https://github.com/syncthing/syncthing/releases, verified against the
+sha256 digest the release publishes. The tarball carries the Go
+modules under vendor/, so the build never touches the network.
+
+Build
+-----
+
+The build needs Go 1.26.2, a pinned tool on the build host at
+/usr/local/go1.26 (docs/build.md of this repository). Debian trixie
+ships golang 1.24, which is too old for go.mod. With that on PATH:
+
+    debuild -us -uc
+
+Build-Depends has no golang entry on purpose: the toolchain is the
+pinned tool of the build host, not an apt package. debian/rules puts
+/usr/local/go1.26/bin at the front of PATH.
+
+Tests
+-----
+
+tests/run.sh checks the packaging (no network-fetched build
+dependencies, the vendor build flag) and, after a build, the .deb:
+its fields, its contents and the binary itself, including a short run
+that listens on a test port. See tests/run.sh.
+
+The upstream test suite is not run at package build time: it is long
+and parts of it need the network or a browser. The binary the package
+ships is what tests/run.sh exercises.
+
+What the package ships
+----------------------
+
+Only /usr/bin/syncthing and the documentation (README.md, LICENSE and
+this notice). The systemd service, the system user and the
+configuration are shipped by the keel-overlay-syncthing overlay, not
+by this package (handbook decision 0050).

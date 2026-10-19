@@ -1,0 +1,22 @@
+# Fast static checks of the packaging (decision 0050 package). The full
+# build runs on the build host with its pinned Go 1.26.2 (docs/build.md);
+# the CI runner has no Go and the vendored build takes more RAM and time
+# than a check job needs. The check is "package / check".
+name: package
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: keel-host
+    steps:
+      - uses: actions/checkout@v4
+      - name: Static packaging checks
+        run: tests/run.sh --static
